@@ -1,0 +1,64 @@
+#Setting the prefix from C-b to C-a
+unbind C-b
+set-option -g prefix C-a
+# Ensure that we can send C-a to other apps
+bind-key C-a send-prefix 
+
+#Setting the delay between prefix and command
+set -s escape-time 1
+
+#Setting tmux terminal color schema
+set -ga terminal-overrides ",xterm-256color*:Tc"
+set -g default-terminal "xterm-256color"
+
+
+#Set the base index to 1 instead of 0
+set -g base-index 1 # for windows
+setw -g pane-base-index 1 # for panes
+
+#Setting Vim mode-keys
+setw -g mode-keys vi
+bind -T copy-mode-vi v send-keys -X begin-selection
+bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'xclip -in -selection clipboard'
+
+# Reload configuration file
+bind r source-file ~/.tmux.conf
+
+# Splitting panes with s and v (like VIM)
+bind s split-window -v
+bind v split-window -h
+
+# Navigation - Moving between panes with Prefix h, j, k, l (like VIM)
+bind -r k select-pane -U
+bind -r j select-pane -D
+bind -r h select-pane -L
+bind -r l select-pane -R
+
+# Navigation - Moving between pane with Prefix Arrow Keys
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+# Resizing panes
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5
+
+# Desable mouse suppport
+set -g mouse off
+
+#Style Grouvbox dark
+
+#Status line
+set-option -g status-style bg=colour237,fg=colour223 # bg=bg1, fg=fg1
+set-option -g status-left "#[bg=colour241,fg=colour248]Ss #S #[bg=colour237,fg=colour241,nobold,noitalics,nounderscore] > "
+set-option -g status-right "#[bg=colour239,fg=colour248,nobold,noitalics,nounderscore] > #(id -un) "
+
+set-window-option -g window-status-current-format "#[bg=colour214,fg=colour239] #I:#[bg=colour214,fg=colour239,bold] #W#{?window_zoomed_flag,*Z,} "
+set-window-option -g window-status-format "#[bg=colour239,fg=colour223] #I:#[bg=colour239,fg=colour223] #W "
+
+# pane border
+set-option -g pane-active-border-style fg=colour250 #fg2
+set-option -g pane-border-style fg=colour237 #bg1
