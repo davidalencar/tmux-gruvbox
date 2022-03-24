@@ -1,3 +1,3 @@
 # tmux-gruvbox
 
-![tmux-gruvbox]("./tmux.png")
+![tmux-gruvbox]("/img/tmux.png")
